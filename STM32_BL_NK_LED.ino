@@ -14,24 +14,25 @@ void loop() {
 }*/
 
 #include <Wire.h>
-#include <SPI.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 
-Adafruit_BME280 bme;
+Adafruit_BME280 bmp;
+
+HardwareSerial Serial2(USART2);   // PA3  (RX)  PA2  (TX)
 
 void setup() 
 {
-    Serial.begin(115200);
-    bme.begin(0x76);        
+    Serial2.begin(115200);
+    bmp.begin(0x76);        
 }
 void loop() 
 {
-    Serial.print("Temperat: ");   
-    Serial.println(bme.readTemperature(),1);
-    Serial.print("Humidity: ");
-    Serial.println(bme.readHumidity(),1);
-    Serial.print("Pressure: ");     
-    Serial.println((bme.readPressure()/100),1);              
+    Serial2.print("Temperat: ");   
+    Serial2.println(bmp.readTemperature(),1);
+    Serial2.print("Humidity: ");
+    Serial2.println(bmp.readHumidity(),1);
+    Serial2.print("Pressure: ");     
+    Serial2.println((bmp.readPressure()/100),1);              
     delay(1000);
 }
